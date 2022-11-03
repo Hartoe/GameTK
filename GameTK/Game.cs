@@ -88,6 +88,8 @@ public abstract class Game
         // Run the game window Update/Render loop
         gameWindow.Run();
     }
+    
+    // Change to check!!
 
     /// <summary>
     /// This method initializes any values and objects that need to be created before entering the Update/Render loop
