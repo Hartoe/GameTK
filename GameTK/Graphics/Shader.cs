@@ -1,4 +1,5 @@
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace GameTK.Graphics;
 
@@ -12,6 +13,9 @@ public class Shader
     /// </summary>
     public readonly int Handle;
 
+    /// <summary>
+    /// Dictionary to cache the active uniforms of the shader
+    /// </summary>
     private Dictionary<string, int> _uniformLocations;
 
     public Shader(string vertexPath, string fragmentPath)
@@ -125,4 +129,54 @@ public class Shader
         GL.UseProgram(Handle);
     }
 
+    /// <summary>
+    /// Returns the location pointer to an attribute with the given name
+    /// </summary>
+    /// <param name="attribName"></param>
+    /// <returns></returns>
+    public int GetAttribLocation(string attribName)
+    {
+        return GL.GetAttribLocation(Handle, attribName);
+    }
+
+    #region Uniform Setters
+
+    public void SetInt(string name, int data)
+    {
+        GL.UseProgram(Handle);
+        GL.Uniform1(_uniformLocations[name], data);
+    }
+
+    public void SetFloat(string name, float data)
+    {
+        GL.UseProgram(Handle);
+        GL.Uniform1(_uniformLocations[name], data);
+    }
+
+    public void SetMatrix4(string name, Matrix4 data)
+    {
+        GL.UseProgram(Handle);
+        GL.UniformMatrix4(_uniformLocations[name], true, ref data);
+    }
+
+    public void SetVector2(string name, Vector2 data)
+    {
+        GL.UseProgram(Handle);
+        GL.Uniform2(_uniformLocations[name], data);
+    }
+    
+    public void SetVector3(string name, Vector3 data)
+    {
+        GL.UseProgram(Handle);
+        GL.Uniform3(_uniformLocations[name], data);
+    }
+
+    public void SetVector4(string name, Vector4 data)
+    {
+        GL.UseProgram(Handle);
+        GL.Uniform4(_uniformLocations[name], data);
+    }
+
+    #endregion
+    
 }
