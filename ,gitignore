@@ -1,0 +1,8 @@
+# Ignore the .idea folder of Rider
+/.idea/
+
+# Ignore the test project for testing the library
+/Test Application/
+
+# Ignore the solution of Rider
+GameTK.sln
