@@ -1,5 +1,4 @@
-using OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL.Compatibility;
+using OpenTK.Graphics.OpenGL4;
 
 namespace GameTK.Graphics;
 
@@ -11,7 +10,9 @@ public class Shader
     /// <summary>
     /// The ProgramHandle from which to call this shader
     /// </summary>
-    public readonly ProgramHandle Handle;
+    public readonly int Handle;
+
+    private Dictionary<string, int> _uniformLocations;
 
     public Shader(string vertexPath, string fragmentPath)
     {
@@ -48,6 +49,9 @@ public class Shader
         GL.DetachShader(Handle, fragmentShader);
         GL.DeleteShader(vertexShader);
         GL.DeleteShader(fragmentShader);
+        
+        // Cache the uniforms in the shader to lower wait time
+        CacheUniforms();
     }
 
     /// <summary>
@@ -55,18 +59,16 @@ public class Shader
     /// </summary>
     /// <param name="shader"></param>
     /// <exception cref="Exception"></exception>
-    private static void CompileShader(ShaderHandle shader)
+    private static void CompileShader(int shader)
     {
         // Try to compile the shader
         GL.CompileShader(shader);
         
         // Check for compilation errors
-        var code = 0;
-        GL.GetShaderi(shader, ShaderParameterName.CompileStatus, ref code);
+        GL.GetShader(shader, ShaderParameter.CompileStatus, out var code);
         if (code != (int)All.True)
         {
-            string infoLog = "";
-            GL.GetShaderInfoLog(shader, out infoLog);
+            GL.GetShaderInfoLog(shader, out var infoLog);
             throw new Exception($"Error occured whilst compiling Shader({shader}).\n\n{infoLog}");
         }
     }
@@ -76,22 +78,45 @@ public class Shader
     /// </summary>
     /// <param name="program"></param>
     /// <exception cref="Exception"></exception>
-    private static void LinkProgram(ProgramHandle program)
+    private static void LinkProgram(int program)
     {
         // Try to link the program
         GL.LinkProgram(program);
         
         // Check for linking errors
-        var code = 0;
-        GL.GetProgrami(program, ProgramPropertyARB.LinkStatus, ref code);
+        GL.GetProgram(program, GetProgramParameterName.LinkStatus, out var code);
         if (code != (int)All.True)
         {
-            string infoLog = "";
-            GL.GetProgramInfoLog(program, out infoLog);
+            GL.GetProgramInfoLog(program, out var infoLog);
             throw new Exception($"Error occured whilst linking Program({program}).\n\n{infoLog}");
         }
     }
 
+    /// <summary>
+    /// Reads and caches each active uniform in the shader
+    /// </summary>
+    private void CacheUniforms()
+    {
+        // Get the number of active uniforms in the shader
+        GL.GetProgram(Handle, GetProgramParameterName.ActiveUniforms, out var numOfUniforms);
+        
+        // Initialize the dictionary
+        _uniformLocations = new Dictionary<string, int>();
+
+        for (int i = 0; i < numOfUniforms; i++)
+        {
+            // Get uniform name
+            var key = GL.GetActiveUniform(Handle, i, out _, out _);
+
+            // Get uniform location
+            var location = GL.GetUniformLocation(Handle, key);
+
+            // Save to the dictionary
+            _uniformLocations.Add(key, location);
+        }
+
+    }
+    
     /// <summary>
     /// Wrapper function to use the shader
     /// </summary>

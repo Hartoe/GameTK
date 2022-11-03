@@ -1,5 +1,4 @@
-using OpenTK.Graphics.OpenGL.Compatibility;
-using OpenTK.Mathematics;
+using OpenTK.Graphics.OpenGL;
 
 namespace GameTK.Graphics;
 
@@ -20,7 +19,6 @@ public static class Graphics
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
         GL.ClearColor(color.Color4);
-        
     }
 
     /// <summary>
