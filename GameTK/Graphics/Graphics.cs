@@ -1,4 +1,7 @@
 using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
+using System.Drawing;
+using PrimitiveType = OpenTK.Graphics.OpenGL.PrimitiveType;
 
 namespace GameTK.Graphics;
 
@@ -9,7 +12,7 @@ public static class Graphics
     /// <summary>
     /// Default color to clear the screen buffer
     /// </summary>
-    public static Color ClearColor = Color.Default;
+    public static Color ClearColor = Color.CornflowerBlue;
 
     /// <summary>
     /// Clear the screen with a given color
@@ -18,7 +21,7 @@ public static class Graphics
     public static void ClearScreen(Color color)
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
-        GL.ClearColor(color.Color4);
+        GL.ClearColor(color);
     }
 
     /// <summary>
@@ -27,7 +30,7 @@ public static class Graphics
     public static void ClearScreen()
     {
         GL.Clear(ClearBufferMask.ColorBufferBit);
-        GL.ClearColor(ClearColor.Color4);
+        GL.ClearColor(ClearColor);
     }
     
     #endregion
@@ -37,6 +40,20 @@ public static class Graphics
     #endregion
     
     #region Draw Textures
+
+    public static void RenderTexture2D(Vector2 position, Texture2D texture)
+    {
+        // Create quad on which to draw the texture
+        
+        
+        // Translate positions
+        
+        // Activate Shader
+        
+        // Activate Texture
+        
+        // Unbind?
+    }
     
     #endregion
 

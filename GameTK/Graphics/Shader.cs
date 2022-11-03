@@ -8,6 +8,24 @@ namespace GameTK.Graphics;
 /// </summary>
 public class Shader
 {
+    public static Shader Default
+        => new Shader(
+            "#version 330 core\n" +
+                      "in vec3 aPosition;\n" +
+                      "out vec4 vertexColor;\n" +
+                      "void main(void)\n" +
+                      "{\n" +
+                      "gl_Position = vec4(aPosition, 1.0);\n" +
+                      "vertexColor = vec4(1.0, 1.0, 1.0, 1.0);\n" +
+                      "}",
+            "#version 330 core\n" +
+            "out vec4 outputColor;\n" +
+            "in vec4 vertexColor;\n" +
+            "void main()\n" +
+            "{\n" +
+            "outputColor = vertexColor;\n" +
+            "}");
+
     /// <summary>
     /// The ProgramHandle from which to call this shader
     /// </summary>
@@ -18,10 +36,8 @@ public class Shader
     /// </summary>
     private Dictionary<string, int> _uniformLocations;
 
-    public Shader(string vertexPath, string fragmentPath)
+    public Shader(string vertexSource, string fragmentSource)
     {
-        // Read the vertex shader .glsl file
-        var vertexSource = File.ReadAllText(vertexPath);
         // Create a new OpenGL Shader Object
         var vertexShader = GL.CreateShader(ShaderType.VertexShader);
         
@@ -29,8 +45,6 @@ public class Shader
         GL.ShaderSource(vertexShader, vertexSource);
         CompileShader(vertexShader);
 
-        // Read the fragment shader .glsl file
-        var fragmentSource = File.ReadAllText(fragmentPath);
         // Create a new OpenGL Shader Object
         var fragmentShader = GL.CreateShader(ShaderType.FragmentShader);
         
