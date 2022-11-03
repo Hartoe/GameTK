@@ -1,0 +1,15 @@
+C:\Users\harto\Documents\Programming\GameTK\Test Application\bin\Debug\net6.0\Test Application.exe
+C:\Users\harto\Documents\Programming\GameTK\Test Application\bin\Debug\net6.0\Test Application.deps.json
+C:\Users\harto\Documents\Programming\GameTK\Test Application\bin\Debug\net6.0\Test Application.runtimeconfig.json
+C:\Users\harto\Documents\Programming\GameTK\Test Application\bin\Debug\net6.0\Test Application.dll
+C:\Users\harto\Documents\Programming\GameTK\Test Application\bin\Debug\net6.0\Test Application.pdb
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.csproj.AssemblyReference.cache
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.AssemblyInfoInputs.cache
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.AssemblyInfo.cs
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.csproj.CoreCompileInputs.cache
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.dll
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\refint\Test Application.dll
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.pdb
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\Test Application.genruntimeconfig.cache
+C:\Users\harto\Documents\Programming\GameTK\Test Application\obj\Debug\net6.0\ref\Test Application.dll
